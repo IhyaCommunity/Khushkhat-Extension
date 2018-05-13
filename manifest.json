@@ -8,6 +8,12 @@
   "icons": {
     "48": "icons/logo.svg"
   },
+
+  "page_action": {
+    "default_icon": "icons/off.svg",
+    "default_popup": "popup/options.html",
+    "browser_style": true
+  },
   
   "permissions": [
     "activeTab",
