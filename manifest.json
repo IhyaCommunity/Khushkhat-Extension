@@ -1,0 +1,21 @@
+{
+
+  "description": "Beautifies Arabic, Persian, Urdu, and other right-to-left (RTL) languages",
+  "manifest_version": 2,
+  "name": "Khushkhat",
+  "version": "1.0",
+  "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/borderify",
+  "icons": {
+    "48": "icons/logo.svg"
+  },
+  
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+
+  "web_accessible_resources":[
+    "css/fonts/*"
+  ]
+
+}
