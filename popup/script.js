@@ -1,5 +1,6 @@
 const TITLE_ENABLE = "Khushkhat Enable";
 const TITLE_DISABLE = "Khushkhat Disable";
+const CSS = {cssOrigin: 'user', file: "/css/style.css"};
 
 var currentTab = null;
 var controlButton = document.querySelector('.control-button');
@@ -33,3 +34,23 @@ function setUIState(state) {
         browser.pageAction.setTitle({tabId: currentTab.id, title: TITLE_ENABLE});
     }
 }
+
+function toggleStyles(tab) {
+
+    function gotTitle(title) {
+      if (title === TITLE_ENABLE) {
+        setUIState(true);
+        browser.tabs.insertCSS(CSS);
+      } else {
+        setUIState(false);
+        browser.tabs.removeCSS(CSS);
+      }
+    }
+
+    var gettingTitle = browser.pageAction.getTitle({tabId: tab.id});
+    gettingTitle.then(gotTitle);
+}
+
+controlButton.addEventListener('click', () => {
+    toggleStyles(currentTab);
+});
