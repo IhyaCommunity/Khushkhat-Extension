@@ -9,6 +9,10 @@
     "48": "icons/logo.svg"
   },
 
+  "background": {
+    "scripts": ["background.js"]
+  },
+
   "page_action": {
     "default_icon": "icons/off.svg",
     "default_popup": "popup/options.html",
