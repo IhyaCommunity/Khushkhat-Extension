@@ -2,8 +2,12 @@ const TITLE_ENABLE = "Khushkhat Enable";
 const TITLE_DISABLE = "Khushkhat Disable";
 const CSS = {cssOrigin: 'user', file: "/css/style.css"};
 
-var currentTab = null;
-var controlButton = document.querySelector('.control-button');
+var currentTab = null,
+controlButton = document.querySelector('.control-button'),
+optionShowButton = document.querySelector('.option-show-button'),
+optionHideButton = document.querySelector('.option-hide-button'),
+controlTab = document.querySelector('.control'),
+optionTab = document.querySelector('.option');
 
 function onError(error) {
     console.log(error);
@@ -23,19 +27,21 @@ browser.tabs.query({currentWindow: true, active: true}).then((tab) => {
 function setUIState(state) {
     if (state) {
         controlButton.classList.add('enable');
+        optionShowButton.disabled = false;
 
         browser.pageAction.setIcon({tabId: currentTab.id, path: "../icons/on.svg"});
         browser.pageAction.setTitle({tabId: currentTab.id, title: TITLE_DISABLE});
     }
     else {
         controlButton.classList.remove('enable');
+        optionShowButton.disabled = true;
 
         browser.pageAction.setIcon({tabId: currentTab.id, path: "../icons/off.svg"});
         browser.pageAction.setTitle({tabId: currentTab.id, title: TITLE_ENABLE});
     }
 }
 
-function toggleStyles(tab) {
+function togglePageStyles(tab) {
 
     function gotTitle(title) {
       if (title === TITLE_ENABLE) {
@@ -52,5 +58,30 @@ function toggleStyles(tab) {
 }
 
 controlButton.addEventListener('click', () => {
-    toggleStyles(currentTab);
+    togglePageStyles(currentTab);
+});
+
+function setOptionState(state) {
+    if (state) {
+        optionTab.classList.add('show');
+        controlTab.classList.remove('show');
+
+        optionShowButton.classList.add('hide');
+        optionHideButton.classList.remove('hide');
+    }
+    else {
+        optionTab.classList.remove('show');
+        controlTab.classList.add('show');
+
+        optionHideButton.classList.add('hide');
+        optionShowButton.classList.remove('hide');
+    }
+}
+
+optionShowButton.addEventListener('click', () => {
+    setOptionState(true);
+});
+
+optionHideButton.addEventListener('click', () => {
+    setOptionState(false);
 });

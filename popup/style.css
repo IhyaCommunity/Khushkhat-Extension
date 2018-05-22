@@ -6,12 +6,34 @@ html, body {
     box-sizing: border-box;
 }
 
+.hide {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 .frame {
     margin: 2rem 0;
 }
 
-.control {
+.tab {
+    display: none;
+    animation: fadeIn 400ms ease-in-out both;
+}
+
+.show {
     display: flex;
+}
+
+.control {
     justify-content: center;
 }
 
@@ -56,7 +78,22 @@ html, body {
     padding: .8rem 1rem;
 }
 
-.navigation img {
-    height: 1.4rem;
+.navigation button {
+    border: 0 none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.navigation button:disabled {
+    cursor: default;
+}
+
+.navigation button:disabled svg {
+    fill: #ccc;
+}
+
+.navigation svg {
+    width: 1.4rem;
+    fill: #5b4636;
     vertical-align: middle;
 }
