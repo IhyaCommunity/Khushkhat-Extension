@@ -26,7 +26,7 @@ html, body {
 
 .tab {
     display: none;
-    animation: fadeIn 400ms ease-in-out both;
+    animation: fadeIn 340ms ease-in-out both;
 }
 
 .show {
@@ -58,6 +58,14 @@ html, body {
 .control-button:hover,
 .control-button:hover svg {
     background-color: #e1e0dc;
+}
+
+.option {
+    flex-flow: column;
+}
+
+.option .size {
+    display: flex;
 }
 
 .enable {
