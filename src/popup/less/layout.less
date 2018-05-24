@@ -1,0 +1,34 @@
+html, body {
+    min-width: 200px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.hide {
+    display: none;
+}
+
+.frame {
+    margin: 2rem 0;
+}
+
+.tab {
+    display: none;
+    animation: fadeIn 340ms ease-in-out both;
+}
+
+.show {
+    display: flex;
+}

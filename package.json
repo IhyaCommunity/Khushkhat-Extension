@@ -1,0 +1,20 @@
+{
+  "name": "khushkhat-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SkyImpel/Khushkhat-Extension.git"
+  },
+  "author": "SkyImpel <support@skyimpel.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SkyImpel/Khushkhat-Extension/issues"
+  },
+  "homepage": "https://github.com/SkyImpel/Khushkhat-Extension#readme"
+}
