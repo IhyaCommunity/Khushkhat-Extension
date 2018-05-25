@@ -16,5 +16,6 @@
   "bugs": {
     "url": "https://github.com/SkyImpel/Khushkhat-Extension/issues"
   },
-  "homepage": "https://github.com/SkyImpel/Khushkhat-Extension#readme"
+  "homepage": "https://github.com/SkyImpel/Khushkhat-Extension#readme",
+  "devDependencies": {}
 }
