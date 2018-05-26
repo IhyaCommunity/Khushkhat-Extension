@@ -4,7 +4,7 @@
   "description": "",
   "main": "",
   "scripts": {
-    "build": "webpack",
+    "build": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,5 +17,8 @@
     "url": "https://github.com/SkyImpel/Khushkhat-Extension/issues"
   },
   "homepage": "https://github.com/SkyImpel/Khushkhat-Extension#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  },
+  "dependencies": {}
 }
