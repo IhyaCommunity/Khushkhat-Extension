@@ -4,8 +4,8 @@
   "description": "",
   "main": "",
   "scripts": {
-    "build": "gulp",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gulp clean && gulp --env production",
+    "dev": "gulp --env development && gulp watch"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,18 @@
   },
   "homepage": "https://github.com/SkyImpel/Khushkhat-Extension#readme",
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.4",
+    "gulp-concat": "^2.6.1",
+    "gulp-environments": "^0.1.2",
+    "gulp-htmlmin": "^4.0.0",
+    "gulp-less": "^3.5.0",
+    "gulp-rename": "^1.2.3",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify-es": "^1.0.4",
+    "less-plugin-autoprefix": "^1.5.1",
+    "less-plugin-glob": "^2.0.2"
   },
   "dependencies": {}
 }
