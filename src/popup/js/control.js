@@ -1,6 +1,6 @@
 const TITLE_ENABLE = "Khushkhat Enable";
 const TITLE_DISABLE = "Khushkhat Disable";
-const CSS = {cssOrigin: 'user', file: "/css/style.css"};
+const CSS = {cssOrigin: 'user', file: "/style/style.css"};
 
 var currentTab = null,
 controlButton = document.querySelector('.control-button'),
