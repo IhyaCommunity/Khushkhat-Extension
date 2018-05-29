@@ -5,7 +5,9 @@
   "main": "",
   "scripts": {
     "build": "gulp clean && gulp --env production",
-    "dev": "gulp --env development && gulp watch"
+    "dev": "gulp --env development && gulp watch",
+    "copy": "gulp copy",
+    "clean": "gulp clean"
   },
   "repository": {
     "type": "git",

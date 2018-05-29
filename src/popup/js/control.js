@@ -1,6 +1,6 @@
 const TITLE_ENABLE = "Khushkhat Enable";
 const TITLE_DISABLE = "Khushkhat Disable";
-const CSS = {cssOrigin: 'user', file: "/style/style.css"};
+const CSS = {cssOrigin: 'user', file: "/style/Jameel-Noori-Nastaleeq.css"};
 
 var currentTab = null,
 controlButton = document.querySelector('.control-button'),
@@ -47,6 +47,9 @@ function togglePageStyles(tab) {
       if (title === TITLE_ENABLE) {
         setUIState(true);
         browser.tabs.insertCSS(CSS);
+        browser.tabs.executeScript({
+            code: `document.documentElement.style.setProperty('--font-size', '140%');`
+        });
       } else {
         setUIState(false);
         browser.tabs.removeCSS(CSS);

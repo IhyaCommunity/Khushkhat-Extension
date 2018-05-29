@@ -56,6 +56,17 @@ gulp.task('less', () =>
         .pipe(gulp.dest('dist/popup/css/'))
 );
 
+gulp.task('style', () =>
+    gulp.src('./src/style/*.less')
+        .pipe(development(sourcemaps.init()))
+        .pipe(less({
+            plugins: [autoprefix, require('less-plugin-glob')]
+        }))
+        .pipe(production(cleanCss()))
+        .pipe(development(sourcemaps.write('/maps')))
+        .pipe(gulp.dest('dist/style/'))
+);
+
 gulp.task('copy', () => {
     function getDestPath(file, dest = 'dist') { 
         let dir = file.base.split('src').pop();
@@ -68,14 +79,21 @@ gulp.task('copy', () => {
 });
 
 gulp.task('clean', () =>
-    del(['dist/popup/css/maps', 'dist/popup/js/maps'])
+    del([
+        'dist/style/fonts',
+        'dist/style/maps',
+        'dist/popup/css/maps',
+        'dist/popup/js/maps'
+    ])
 );
 
 gulp.task('watch', () => {
     gulp.watch('src/popup/*.html', ['html-minify-popup']);
     gulp.watch('src/popup/less/**/*', ['less']);
+    gulp.watch('src/style/*.less', ['style']);
     gulp.watch(['src/popup/js/*.js'], ['js-minify-popup']);
     gulp.watch(['src/*.js'], ['js-minify-bg']);
 });
 
-gulp.task('default', ['copy', 'image-minify', 'html-minify-popup', 'less', 'js-minify-bg', 'js-minify-popup']);
+gulp.task('default', ['copy', 'image-minify', 'html-minify-popup', 
+        'less', 'style', 'js-minify-bg', 'js-minify-popup']);
