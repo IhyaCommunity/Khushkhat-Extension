@@ -1,4 +1,4 @@
-<img src="icons/logo.svg" alt="Khushkhat" width="100">
+<img src="src/icons/logo.svg" alt="Khushkhat" width="100">
 
 # Khushkhat
 ## WebExtension
