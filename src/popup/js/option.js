@@ -1,4 +1,5 @@
-
+let defaultSizeButton = document.querySelector('.default-button');
+setSelectedSizeText();
 
 let fontSelect = optionTab.querySelector('.font-select');
 
@@ -8,7 +9,7 @@ for (let i in fonts) {
     option.textContent = fonts[i].name;
     option.value = i;
 
-    if (SELECTED_FONT_INDEX == i) {
+    if (selectedFontIndex == i) {
         option.selected = true;
     }
 
@@ -17,6 +18,30 @@ for (let i in fonts) {
 
 fontSelect.addEventListener('change', (e) => {
     changeFont(fontSelect.value);
+});
+
+document.querySelector('.decrease-button').addEventListener('click', (e) => {
+    let size = selectedFontSize - 20;
+    if (size < 80) return;
+    
+    selectedFontSize = size;
+    changeFontSize(selectedFontSize);
+    setSelectedSizeText();
+});
+
+document.querySelector('.default-button').addEventListener('click', (e) => {
+    selectedFontSize = DEFAULT_FONT_SIZE;
+    changeFontSize(selectedFontSize);
+    setSelectedSizeText();
+});
+
+document.querySelector('.increase-button').addEventListener('click', (e) => {
+    let size = selectedFontSize + 20;
+    if (size > 200) return;
+    
+    selectedFontSize = size;
+    changeFontSize(selectedFontSize);
+    setSelectedSizeText();
 });
 
 function changeFont(i) {
@@ -31,11 +56,6 @@ function changeFont(i) {
     }
 }
 
-function changeFontSize(fontSize) {
-    if (isStyleEnable) {
-        browser.tabs.executeScript({
-            code: `document.documentElement.style.setProperty('--font-size', '${fontSize}');`
-        });
-    }
+function setSelectedSizeText() {
+    defaultSizeButton.textContent = selectedFontSize + '%';
 }
-

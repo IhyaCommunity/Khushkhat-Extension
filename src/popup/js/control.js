@@ -18,11 +18,14 @@ let fonts = [
     }
 ];
 
-const SELECTED_FONT_INDEX = 0;
-const SELECTED_FONT_SIZE = '140%';
+const DEFAULT_FONT_INDEX = 0;
+const DEFAULT_FONT_SIZE = 140;
 
-let FONT_FACE_CSS = {cssOrigin: 'user', file: getFontFaceStyle(SELECTED_FONT_INDEX)};
-let FONT_CSS = {cssOrigin: 'user', file: `/style/font.css`};
+let selectedFontIndex = 0;
+let selectedFontSize = 140;
+
+let fontFaceCss = {cssOrigin: 'user', file: getFontFaceStyle(selectedFontIndex)};
+let fontCss = {cssOrigin: 'user', file: `/style/font.css`};
 
 var currentTab = null,
 controlButton = document.querySelector('.control-button'),
@@ -70,18 +73,16 @@ function setUIState(state) {
 function togglePageStyles(tab) {
 
     function gotTitle(title) {
-      if (title === TITLE_ENABLE) {
-        setUIState(true);
-        browser.tabs.insertCSS(FONT_FACE_CSS);
-        browser.tabs.insertCSS(FONT_CSS);
-        browser.tabs.executeScript({
-            code: `document.documentElement.style.setProperty('--font-size', '${SELECTED_FONT_SIZE}');`
-        });
-      } else {
-        setUIState(false);
-        browser.tabs.removeCSS(FONT_CSS);
-        browser.tabs.removeCSS(FONT_FACE_CSS);
-      }
+        if (title === TITLE_ENABLE) {
+            setUIState(true);
+            applyFontFaceStyle();
+            browser.tabs.insertCSS(fontCss);
+            changeFontSize(selectedFontSize);
+        } else {
+            browser.tabs.removeCSS(fontCss);
+            removeFontFaceStyle()
+            setUIState(false);
+        }
     }
 
     var gettingTitle = browser.pageAction.getTitle({tabId: tab.id});
@@ -109,16 +110,22 @@ function setOptionState(state) {
     }
 }
 
+function changeFontSize(fontSize) {
+    browser.tabs.executeScript({
+        code: `document.documentElement.style.setProperty('--font-size', '${fontSize}%');`
+    });
+}
+
 function applyFontFaceStyle() {
-    browser.tabs.insertCSS(FONT_FACE_CSS);
+    browser.tabs.insertCSS(fontFaceCss);
 }
 
 function removeFontFaceStyle() {
-    browser.tabs.removeCSS(FONT_FACE_CSS);
+    browser.tabs.removeCSS(fontFaceCss);
 }
 
 function changeFontFace(i) {
-    FONT_FACE_CSS.file = getFontFaceStyle(i);
+    fontFaceCss.file = getFontFaceStyle(i);
 }
 
 function getFontFaceStyle(i) {
