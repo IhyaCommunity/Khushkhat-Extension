@@ -6,6 +6,7 @@
   "scripts": {
     "build": "gulp clean && gulp --env production",
     "dev": "gulp --env development && gulp watch",
+    "start": "cd dist && web-ext run --firefox=\"C:\\Program Files\\Firefox Developer Edition\\firefox.exe\"",
     "copy": "gulp copy",
     "clean": "gulp clean"
   },

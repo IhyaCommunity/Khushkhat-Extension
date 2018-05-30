@@ -1,6 +1,28 @@
 const TITLE_ENABLE = "Khushkhat Enable";
 const TITLE_DISABLE = "Khushkhat Disable";
-const CSS = {cssOrigin: 'user', file: "/style/Jameel-Noori-Nastaleeq.css"};
+
+let isStyleEnable = false;
+
+let fonts = [
+    {
+        id: 'Jameel-Noori-Nastaleeq',
+        name: 'Jameel Noori Nastaleeq'
+    },
+    {
+        id: 'Noori-Khushkhat',
+        name: 'Noori Khushkhat'
+    },
+    {
+        id: 'Urdu-Naskh-Asiatype',
+        name: 'Urdu Naskh Asiatype'
+    }
+];
+
+const SELECTED_FONT_INDEX = 0;
+const SELECTED_FONT_SIZE = '140%';
+
+let FONT_FACE_CSS = {cssOrigin: 'user', file: getFontFaceStyle(SELECTED_FONT_INDEX)};
+let FONT_CSS = {cssOrigin: 'user', file: `/style/font.css`};
 
 var currentTab = null,
 controlButton = document.querySelector('.control-button'),
@@ -31,6 +53,8 @@ function setUIState(state) {
 
         browser.pageAction.setIcon({tabId: currentTab.id, path: "../icons/on.svg"});
         browser.pageAction.setTitle({tabId: currentTab.id, title: TITLE_DISABLE});
+
+        isStyleEnable = true;
     }
     else {
         controlButton.classList.remove('enable');
@@ -38,6 +62,8 @@ function setUIState(state) {
 
         browser.pageAction.setIcon({tabId: currentTab.id, path: "../icons/off.svg"});
         browser.pageAction.setTitle({tabId: currentTab.id, title: TITLE_ENABLE});
+
+        isStyleEnable = false;
     }
 }
 
@@ -46,13 +72,15 @@ function togglePageStyles(tab) {
     function gotTitle(title) {
       if (title === TITLE_ENABLE) {
         setUIState(true);
-        browser.tabs.insertCSS(CSS);
+        browser.tabs.insertCSS(FONT_FACE_CSS);
+        browser.tabs.insertCSS(FONT_CSS);
         browser.tabs.executeScript({
-            code: `document.documentElement.style.setProperty('--font-size', '140%');`
+            code: `document.documentElement.style.setProperty('--font-size', '${SELECTED_FONT_SIZE}');`
         });
       } else {
         setUIState(false);
-        browser.tabs.removeCSS(CSS);
+        browser.tabs.removeCSS(FONT_CSS);
+        browser.tabs.removeCSS(FONT_FACE_CSS);
       }
     }
 
@@ -79,6 +107,22 @@ function setOptionState(state) {
         optionHideButton.classList.add('hide');
         optionShowButton.classList.remove('hide');
     }
+}
+
+function applyFontFaceStyle() {
+    browser.tabs.insertCSS(FONT_FACE_CSS);
+}
+
+function removeFontFaceStyle() {
+    browser.tabs.removeCSS(FONT_FACE_CSS);
+}
+
+function changeFontFace(i) {
+    FONT_FACE_CSS.file = getFontFaceStyle(i);
+}
+
+function getFontFaceStyle(i) {
+    return `/style/${fonts[i].id}.css`;
 }
 
 optionShowButton.addEventListener('click', () => {

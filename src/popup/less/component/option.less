@@ -1,7 +1,37 @@
 .option {
     flex-flow: column;
+    padding: 0 .8rem;
+
+    select {
+        color: @color-enable;
+        padding: .4rem;
+        margin-bottom: .8rem;
+        border: 1px solid @color-border;
+        border-radius: .2rem;
+    }
+
+    .size {
+        display: flex;
+    }
+
+    button {
+        flex: 1;
+        color: @color-enable;
+        background-color: #fff;
+        border: 1px solid @color-border;
+        border-radius: .2rem;
+        padding: .8rem;
+        margin: .2rem;
+        font-size: 1.2rem;
+        text-align: center;
+
+        &:hover {
+            background-color: @bgc-enable;
+        }
+
+        &:active {
+            background-color: @bgc-hover;
+        }
+    }
 }
 
-.option .size {
-    display: flex;
-}

@@ -35,7 +35,7 @@ gulp.task("js-minify-popup", () =>
         .pipe(development(sourcemaps.init()))
         .pipe(concat('script.js'))
         .pipe(production(jsMinify()))
-        .pipe(development(sourcemaps.write('/maps')))
+        .pipe(development(sourcemaps.write()))
         .pipe(gulp.dest('dist/popup/js/'))
 );
 
@@ -52,7 +52,7 @@ gulp.task('less', () =>
             plugins: [autoprefix, require('less-plugin-glob')]
         }))
         .pipe(production(cleanCss()))
-        .pipe(development(sourcemaps.write('/maps')))
+        .pipe(development(sourcemaps.write()))
         .pipe(gulp.dest('dist/popup/css/'))
 );
 
@@ -63,7 +63,7 @@ gulp.task('style', () =>
             plugins: [autoprefix, require('less-plugin-glob')]
         }))
         .pipe(production(cleanCss()))
-        .pipe(development(sourcemaps.write('/maps')))
+        .pipe(development(sourcemaps.write()))
         .pipe(gulp.dest('dist/style/'))
 );
 
