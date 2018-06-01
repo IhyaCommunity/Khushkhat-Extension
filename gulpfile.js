@@ -1,13 +1,13 @@
 const path = require('path'),
     del = require('del'),
     gulp = require('gulp'),
-    concat = require('gulp-concat'),
     changed = require("gulp-changed"),
     env = require('gulp-environments'),
     htmlmin = require('gulp-htmlmin'),
     imagemin = require('gulp-imagemin');
     cleanCss = require('gulp-clean-css'),
     less = require('gulp-less'),
+    ts = require('gulp-typescript'),
     jsMinify = require('gulp-uglify-es').default,
     sourcemaps = require('gulp-sourcemaps'),
     LessAutoprefix = require('less-plugin-autoprefix');
@@ -16,6 +16,9 @@ let development = env.development,
     production = env.production;
 
 let autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] });
+
+let tsBgProject = ts.createProject('tsconfig.json', { outFile: 'background.js' });
+let tsPopupProject = ts.createProject('tsconfig.json', { outFile: 'script.js' });
 
 gulp.task('html-minify-popup', () => {
     gulp.src('src/popup/*.html')
@@ -30,19 +33,22 @@ gulp.task('image-minify', () =>
         .pipe(gulp.dest('dist/icons'))
 );
 
-gulp.task("js-minify-popup", () =>
-    gulp.src(['./src/popup/js/control.js', './src/popup/js/option.js'])
+gulp.task("ts-minify-bg", () =>
+    gulp.src(['./src/background.ts'])
         .pipe(development(sourcemaps.init()))
-        .pipe(concat('script.js'))
+        .pipe(tsBgProject())
+        .pipe(production(jsMinify()))
+        .pipe(development(sourcemaps.write()))
+        .pipe(gulp.dest('dist/'))
+);
+
+gulp.task("ts-minify-popup", () =>
+    gulp.src(['./src/popup/ts/*.ts'])
+        .pipe(development(sourcemaps.init()))
+        .pipe(tsPopupProject())
         .pipe(production(jsMinify()))
         .pipe(development(sourcemaps.write()))
         .pipe(gulp.dest('dist/popup/js/'))
-);
-
-gulp.task("js-minify-bg", () =>
-    gulp.src('./src/background.js')
-        .pipe(production(jsMinify()))
-        .pipe(gulp.dest('dist/'))
 );
 
 gulp.task('less', () =>
@@ -91,9 +97,9 @@ gulp.task('watch', () => {
     gulp.watch('src/popup/*.html', ['html-minify-popup']);
     gulp.watch('src/popup/less/**/*', ['less']);
     gulp.watch('src/style/*.less', ['style']);
-    gulp.watch(['src/popup/js/*.js'], ['js-minify-popup']);
-    gulp.watch(['src/*.js'], ['js-minify-bg']);
+    gulp.watch(['src/popup/ts/*.ts'], ['ts-minify-popup']);
+    gulp.watch(['src/*.ts'], ['ts-minify-bg']);
 });
 
 gulp.task('default', ['copy', 'image-minify', 'html-minify-popup', 
-        'less', 'style', 'js-minify-bg', 'js-minify-popup']);
+        'less', 'style', 'ts-minify-bg', 'ts-minify-popup']);

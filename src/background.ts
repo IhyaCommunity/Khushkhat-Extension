@@ -1,5 +1,5 @@
-TITLE_ENABLE = "Khushkhat Enable";
-TITLE_DISABLE = "Khushkhat Disable";
+const TITLE_ENABLE = "Khushkhat Enable";
+const TITLE_DISABLE = "Khushkhat Disable";
 const APPLICABLE_PROTOCOLS = ["http:", "https:"];
 
 function protocolIsApplicable(url) {

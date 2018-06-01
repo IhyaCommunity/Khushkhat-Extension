@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/SkyImpel/Khushkhat-Extension#readme",
   "devDependencies": {
+    "@types/firefox-webext-browser": "^58.0.3",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-changed": "^3.2.0",
@@ -31,9 +32,11 @@
     "gulp-imagemin": "^4.1.0",
     "gulp-less": "^3.5.0",
     "gulp-sourcemaps": "^2.6.4",
+    "gulp-typescript": "^4.0.2",
     "gulp-uglify-es": "^1.0.4",
     "less-plugin-autoprefix": "^1.5.1",
-    "less-plugin-glob": "^2.0.2"
+    "less-plugin-glob": "^2.0.2",
+    "typescript": "^2.8.4"
   },
   "dependencies": {}
 }
