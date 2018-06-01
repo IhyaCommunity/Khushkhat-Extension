@@ -36,7 +36,7 @@
     "gulp-uglify-es": "^1.0.4",
     "less-plugin-autoprefix": "^1.5.1",
     "less-plugin-glob": "^2.0.2",
-    "typescript": "^2.8.4"
+    "typescript": "^2.9.1"
   },
   "dependencies": {}
 }
