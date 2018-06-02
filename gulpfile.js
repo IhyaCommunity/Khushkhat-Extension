@@ -74,14 +74,9 @@ gulp.task('style', () =>
 );
 
 gulp.task('copy', () => {
-    function getDestPath(file, dest = 'dist') { 
-        let dir = file.base.split('src').pop();
-        return path.join(dest, dir);
-    }
-
-    gulp.src(['src/manifest.json', 'src/style/fonts/**'])
-        .pipe(changed(getDestPath))
-        .pipe(gulp.dest(getDestPath));
+    gulp.src(['src/manifest.json', 'src/style/fonts/**'], {base: 'src'})
+    .pipe(changed('dist'))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('clean', () =>
@@ -97,8 +92,9 @@ gulp.task('watch', () => {
     gulp.watch('src/popup/*.html', ['html-minify-popup']);
     gulp.watch('src/popup/less/**/*', ['less']);
     gulp.watch('src/style/*.less', ['style']);
-    gulp.watch(['src/popup/ts/*.ts'], ['ts-minify-popup']);
-    gulp.watch(['src/*.ts'], ['ts-minify-bg']);
+    gulp.watch('src/popup/ts/*.ts', ['ts-minify-popup']);
+    gulp.watch('src/*.ts', ['ts-minify-bg']);
+    gulp.watch(['src/manifest.json', 'src/style/fonts/**'], ['copy']);
 });
 
 gulp.task('default', ['copy', 'image-minify', 'html-minify-popup', 
