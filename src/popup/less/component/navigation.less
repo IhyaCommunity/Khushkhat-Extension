@@ -4,24 +4,28 @@
     align-items: center;
     background-color: #f4ecd8;
     padding: .8rem 1rem;
-}
+    
+    button {
+        border: 0 none;
+        background: transparent;
+        cursor: pointer;
+    
+        &:disabled {
+            cursor: default;
+        }
+        
+        &:disabled svg {
+            fill: #ccc;
+        }
+    }
 
-.navigation button {
-    border: 0 none;
-    background: transparent;
-    cursor: pointer;
-}
+    svg {
+        width: 1.4rem;
+        fill: #5b4636;
+        vertical-align: middle;
+    }
 
-.navigation button:disabled {
-    cursor: default;
-}
-
-.navigation button:disabled svg {
-    fill: #ccc;
-}
-
-.navigation svg {
-    width: 1.4rem;
-    fill: #5b4636;
-    vertical-align: middle;
+    .option-clear-button {
+        margin-right: auto;
+    }
 }

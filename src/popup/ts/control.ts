@@ -38,17 +38,20 @@ namespace Popup {
     
         setOptionState(state) {
             if (state) {
+                
                 this._base.optionTab.classList.add('show');
                 this._base.controlTab.classList.remove('show');
     
                 this._base.optionShowButton.classList.add('hide');
                 this._base.optionHideButton.classList.remove('hide');
+                this._base.optionclearButton.classList.remove('hide');
             }
             else {
                 this._base.optionTab.classList.remove('show');
                 this._base.controlTab.classList.add('show');
     
                 this._base.optionHideButton.classList.add('hide');
+                this._base.optionclearButton.classList.add('hide');
                 this._base.optionShowButton.classList.remove('hide');
             }
         }

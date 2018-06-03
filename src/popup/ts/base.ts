@@ -29,6 +29,7 @@ namespace Popup {
         controlButton:HTMLButtonElement = document.querySelector('.control-button');
         optionShowButton:HTMLButtonElement = document.querySelector('.option-show-button');
         optionHideButton:HTMLButtonElement = document.querySelector('.option-hide-button');
+        optionclearButton:HTMLButtonElement = document.querySelector('.option-clear-button');
         controlTab = document.querySelector('.control');
         optionTab = document.querySelector('.option');
 
