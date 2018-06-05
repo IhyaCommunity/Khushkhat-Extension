@@ -9,7 +9,7 @@ namespace Popup {
                 _base.currentTab = tab[0];
         
                 browser.pageAction.getTitle({tabId: _base.currentTab.id}).then((title) => {
-                    if (title == _base.TITLE_DISABLE) {
+                    if (title == Addon.TITLE_DISABLE) {
                         this.setUIState(true);
                     }
                 });

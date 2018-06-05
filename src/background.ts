@@ -1,9 +1,9 @@
-const TITLE_ENABLE = "Khushkhat Enable";
-const TITLE_DISABLE = "Khushkhat Disable";
-const APPLICABLE_PROTOCOLS = ["http:", "https:"];
+/// <reference path="./addon.ts" />
 
-function protocolIsApplicable(url) {
-  var anchor =  document.createElement('a');
+Addon.loadData();
+
+function protocolIsApplicable(url:string) {
+  let anchor =  document.createElement('a');
   anchor.href = url;
 
   // For testing with a file
@@ -11,21 +11,22 @@ function protocolIsApplicable(url) {
   // return APPLICABLE_PROTOCOLS.includes(anchor.protocol);
 }
 
-function initializePageAction(tab) {
+
+function initializePageAction(tab:browser.tabs.Tab) {
   if (protocolIsApplicable(tab.url)) {
     setUIState(tab, false);
     browser.pageAction.show(tab.id);
   }
 }
 
-function setUIState(tab, state) {
+function setUIState(tab:browser.tabs.Tab, state:boolean) {
   if (state) {
       browser.pageAction.setIcon({tabId: tab.id, path: "../icons/on.svg"});
-      browser.pageAction.setTitle({tabId: tab.id, title: TITLE_DISABLE});
+      browser.pageAction.setTitle({tabId: tab.id, title: Addon.TITLE_DISABLE});
   }
   else {
       browser.pageAction.setIcon({tabId: tab.id, path: "../icons/off.svg"});
-      browser.pageAction.setTitle({tabId: tab.id, title: TITLE_ENABLE});
+      browser.pageAction.setTitle({tabId: tab.id, title: Addon.TITLE_ENABLE});
   }
 }
 
@@ -33,7 +34,7 @@ function setUIState(tab, state) {
 When first loaded, initialize the page action for all tabs.
 */
 var gettingAllTabs = browser.tabs.query({});
-gettingAllTabs.then((tabs) => {
+gettingAllTabs.then((tabs:browser.tabs.Tab[]) => {
   for (let tab of tabs) {
     initializePageAction(tab);
   }
