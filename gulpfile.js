@@ -18,7 +18,7 @@ let development = env.development,
 
 let autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] });
 
-let tsBgProject = ts.createProject('tsconfig.json', { outFile: 'background.js' });
+let tsBgProject = ts.createProject('tsconfig.json', { outFile: 'initialize.js' });
 let tsPopupProject = ts.createProject('tsconfig.json', { outFile: 'script.js' });
 
 gulp.task('html-minify-popup', () => {
@@ -37,7 +37,7 @@ gulp.task('image-minify', () =>
 );
 
 gulp.task("ts-minify-bg", () =>
-    gulp.src(['./src/background.ts'])
+    gulp.src(['./src/initialize.ts'])
         .pipe(development(sourcemaps.init()))
         .pipe(tsBgProject())
         .pipe(production(jsMinify()))
