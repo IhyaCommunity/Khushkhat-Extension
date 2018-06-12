@@ -5,18 +5,8 @@ class TabStorage {
     private constructor()
     { }
 
-    public static get Instance()
-    {
+    public static get Instance() {
         return this._instance || (this._instance = new this());
-    }
-
-    private _onActiveTab():Promise<browser.tabs.Tab> {
-        return new Promise((resolve, reject) => {
-            browser.tabs.query({currentWindow: true, active: true})
-            .then((tabs) => {
-                resolve(tabs[0]);
-            }, reject);
-        });
     }
 
     private _getHost(url:string):string {
@@ -32,7 +22,7 @@ class TabStorage {
 
     getData():Promise<FontData> {
         return new Promise((resolve, reject) => {
-            this._onActiveTab().then((tab) => {
+            Utility.onActiveTab().then((tab) => {
                 let host = this._getHost(tab.url);
                 return browser.storage.local.get(host);
             })
@@ -48,7 +38,7 @@ class TabStorage {
     }
     
     setData(data:FontData):Promise<void> {
-        return this._onActiveTab().then((tab) => {
+        return Utility.onActiveTab().then((tab) => {
             let host = this._getHost(tab.url);
             let dataObj = {};
 
@@ -58,7 +48,7 @@ class TabStorage {
     }
     
     remove():Promise<void> {
-        return this._onActiveTab().then((tab) => {
+        return Utility.onActiveTab().then((tab) => {
             let host = this._getHost(tab.url);
             return browser.storage.local.remove(host);
         });
@@ -70,14 +60,13 @@ class TabStorage {
 }
 
 class FontData {
-    constructor(index:number, size:number) {
+    constructor(index:number, size:number, isEnable:boolean) {
         this.index = index;
         this.size = size;
+        this.isEnable = isEnable;
     }
-  
-    get index():number { return this.index; }
-    set index(index: number) { this.index = index }
 
-    get size():number { return this.size; }
-    set size(size: number) { this.size = size }
+    index:number;
+    size:number;
+    isEnable:boolean;
 }

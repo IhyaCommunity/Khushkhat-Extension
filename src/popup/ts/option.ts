@@ -21,6 +21,7 @@ namespace Popup {
                 this._fontSelect.appendChild(optionTab);
             }
 
+            this.setSelectedSizeText();
             this._bindEventListener();
         }
 
@@ -35,6 +36,7 @@ namespace Popup {
         _bindEventListener() {
             this._fontSelect.addEventListener('change', (e) => {
                 this.changeFont(parseInt(this._fontSelect.value));
+                Addon.saveData();
             });
 
             document.querySelector('.decrease-button').addEventListener('click', (e) => {
@@ -44,12 +46,13 @@ namespace Popup {
                 Addon.font.selectedSize = size;
                 Addon.font.changeFontSize();
                 this.setSelectedSizeText();
+                Addon.saveData();
             });
 
             document.querySelector('.default-button').addEventListener('click', (e) => {
-                Addon.font.selectedSize = Addon.DEFAULT_FONT_SIZE;
                 Addon.font.changeFontSize();
                 this.setSelectedSizeText();
+                Addon.saveData();
             });
             
             document.querySelector('.increase-button').addEventListener('click', (e) => {
@@ -59,6 +62,7 @@ namespace Popup {
                 Addon.font.selectedSize = size;
                 Addon.font.changeFontSize();
                 this.setSelectedSizeText();
+                Addon.saveData();
             });
 
             this._base.optionclearButton.addEventListener('click', (e) => {
@@ -67,13 +71,12 @@ namespace Popup {
         }
 
         changeFont(index:number) {
-            if (this._base.isStyleEnable) {
+            if (Addon.isEnable) {
                 Addon.font.removeFontFaceStyle();
         
                 if(index > -1) {
                     Addon.font.selectedIndex = index;
                     Addon.font.changeFontFace();
-                    Addon.font.applyFontFaceStyle();
                 }
             }
         }

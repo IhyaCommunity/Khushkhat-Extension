@@ -5,19 +5,13 @@ namespace Popup {
     
         protected constructor(protected _base:Base)
         {
-            browser.tabs.query({currentWindow: true, active: true}).then((tab) => {
-                _base.currentTab = tab[0];
-        
-                browser.pageAction.getTitle({tabId: _base.currentTab.id}).then((title) => {
-                    if (title == Addon.TITLE_DISABLE) {
-                        this.setUIState(true);
-                    }
-                });
-        
-            }, _base.onError);
-    
+            console.log(Addon.isEnable);
+
+            if (Addon.isEnable) {
+                this.setUIState(true);
+            }
+            
             this._bindEventListeners();
-    
         }
     
         public static Instance(base:Base)
@@ -58,8 +52,9 @@ namespace Popup {
     
         private _bindEventListeners() {
             this._base.controlButton.addEventListener('click', () => {
-                this._base.togglePageStyles((state) => {
+                Addon.toggleStyle(this._base.currentTab, (state) => {
                     this.setUIState(state);
+                    Addon.saveData();
                 });
             });
         

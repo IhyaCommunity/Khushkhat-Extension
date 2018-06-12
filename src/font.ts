@@ -2,27 +2,24 @@ class Font {
 
     private static _instance:Font;
 
-    private constructor()
+    private constructor(public selectedIndex:number, public selectedSize:number)
     {
-
+        this.fontFaceCss.file = this._getFontFaceStyle();
     }
 
-    public static get Instance()
+    public static Instance(selectedIndex:number, selectedSize:number)
     {
-        return this._instance || (this._instance = new this());
+        return this._instance || (this._instance = new this(selectedIndex, selectedSize));
     }
-
-    selectedIndex:number = 0;
-    selectedSize:number = 140;
 
     fontFaceCss = {
-        cssOrigin: browser.extensionTypes.CSSOrigin.user, 
-        file: this._getFontFaceStyle()
+        cssOrigin: browser.extensionTypes.CSSOrigin.user,
+        file: ''
     };
     
     fontCss = {
-        cssOrigin: browser.extensionTypes.CSSOrigin.user, 
-        file: `/style/font.css`
+        cssOrigin: browser.extensionTypes.CSSOrigin.user,
+        file: browser.extension.getURL("style/font.css")
     };
 
     get fonts():FontObject[] {
@@ -44,35 +41,37 @@ class Font {
 
         return fonts;
     }
-
-    changeFontSize() {
-        browser.tabs.executeScript({
-            code: `document.documentElement.style.setProperty('--font-size', '${this.selectedSize}%');`
-        });
-    }
     
     applyFontFaceStyle() {
         browser.tabs.insertCSS(this.fontFaceCss);
+    }
+
+    removeFontFaceStyle() {
+        browser.tabs.removeCSS(this.fontFaceCss);
     }
 
     applyStyle() {
         browser.tabs.insertCSS(this.fontCss);
     }
     
-    removeFontFaceStyle() {
-        browser.tabs.removeCSS(this.fontFaceCss);
-    }
-
     removeStyle() {
         browser.tabs.removeCSS(this.fontCss);
     }
-    
-    changeFontFace() {
-        this.fontFaceCss.file = this._getFontFaceStyle();
+
+    changeFontSize() {
+        browser.tabs.executeScript({
+            code: `document.documentElement.style.setProperty('--font-size', '${this.selectedSize}%');`
+        });
     }
-    
-    _getFontFaceStyle() {
-        return `/style/${this.fonts[this.selectedIndex].id}.css`;
+
+    changeFontFace() {
+        this.removeFontFaceStyle();
+        this.fontFaceCss.file = this._getFontFaceStyle();
+        this.applyFontFaceStyle();
+    }
+
+    private _getFontFaceStyle() {
+        return browser.extension.getURL(`style/${this.fonts[this.selectedIndex].id}.css`);
     }
 }
 
