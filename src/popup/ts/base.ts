@@ -32,5 +32,9 @@ namespace Popup {
                 }, this.onError);
             });
         }
+
+        closePopup() {
+            window.close();
+        }
     }
 }

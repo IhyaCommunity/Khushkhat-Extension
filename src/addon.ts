@@ -79,6 +79,20 @@ class Addon {
             .catch(this._onError);
     }
 
+    private static _assignData(data?:FontData) {
+        if (data != null) {
+            this.font.selectedIndex = data.index;
+            this.font.selectedSize = data.size;
+            this.isEnable = data.isEnable;
+        }
+        else {
+            this.font.selectedIndex = this.DEFAULT_FONT_INDEX;
+            this.font.selectedSize = this.DEFAULT_FONT_SIZE;
+            this.isEnable = false;
+        }
+
+    }
+
     static initLoadData(tab):Promise<void> {
         return new Promise((resolve, reject) => {
             Addon.tabStorage.getData().then((data:FontData) => {
@@ -86,28 +100,32 @@ class Addon {
                     this.setUIState(tab, data.isEnable);
                 }
 
-                this.font.selectedIndex = data.index;
-                this.font.selectedSize = data.size;
-                this.isEnable = data.isEnable;
-                
+                this._assignData(data);
                 this.setStyleState(data.isEnable);
-
                 resolve();
+
             }, reject);
         });
     }
 
     static loadData(tab):Promise<void> {
         return new Promise((resolve, reject) => {
-            Addon.tabStorage.getData().then((data:FontData) => {
-                console.log(data);
-                
-                this.font.selectedIndex = data.index;
-                this.font.selectedSize = data.size;
-                this.isEnable = data.isEnable;
-
+            this.tabStorage.getData().then((data:FontData) => {
+                this._assignData(data);
                 resolve();
-            }, reject);
+            }, (reason) => {
+                this._assignData();
+                resolve();
+            });
         });
+    }
+
+    static clearData(tab):Promise<void> {
+
+        this._assignData();
+        this.setUIState(tab, false);
+        this.setStyleState(false);
+
+        return this.tabStorage.clear();
     }
 }

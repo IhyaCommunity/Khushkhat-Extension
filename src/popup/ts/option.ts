@@ -66,7 +66,9 @@ namespace Popup {
             });
 
             this._base.optionclearButton.addEventListener('click', (e) => {
-                console.log('Clear');
+                Addon.clearData(this._base.currentTab).then(() => {
+                    this._base.closePopup();
+                });
             });
         }
 
