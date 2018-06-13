@@ -11,7 +11,7 @@ class App {
 
     private constructor() {
         let base = Popup.Base.Instance;
-        base.loadData().then((e)=> {
+        base.loadData().then(()=> {
             this.control = Popup.Control.Instance(base);
             this.options = Popup.Options.Instance(base);
         });

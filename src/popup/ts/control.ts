@@ -5,8 +5,6 @@ namespace Popup {
     
         protected constructor(protected _base:Base)
         {
-            console.log(Addon.isEnable);
-
             if (Addon.isEnable) {
                 this.setUIState(true);
             }
