@@ -1,8 +1,10 @@
 .navigation {
-    display: flex;
-    justify-content: end;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 2rem);
+    grid-auto-flow: column;
     align-items: center;
-    background-color: #f4ecd8;
+    justify-content: start;
+    background-color: @bgc-light;
     padding: .8rem 1rem;
     
     button {
@@ -25,7 +27,8 @@
         vertical-align: middle;
     }
 
-    .option-clear-button {
-        margin-right: auto;
+    .option-show-button,
+    .option-hide-button {
+        grid-column-end: -1;
     }
 }

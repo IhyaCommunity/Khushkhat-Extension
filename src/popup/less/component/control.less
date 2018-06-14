@@ -1,36 +1,37 @@
 .control {
     justify-content: center;
-}
+    margin: 2rem 0;
 
-.control-button {
-    width: 80%;
-    color: @color-disable;
-    background-color: @bgc-disable;
-    border: 1px solid @color-border;
-    border-radius: .2rem;
-    padding: .8rem 1rem;
-    font-size: 1.4rem;
-    text-align: center;
-    cursor: pointer;
-
-    svg {
-        width: 1rem;
-        margin-right: .4rem;
-        fill: @color-disable;
-    }
-
-    &:hover,
-    &:hover svg {
-        background-color: @bgc-hover;
-    }
-}
-
-.enable {
-    color: @color-enable;
-    background-color: @bgc-enable;
-    fill: @color-enable;
+    .control-button {
+        width: 80%;
+        color: @color-disable;
+        background-color: @bgc-disable;
+        border: 1px solid @color-border;
+        border-radius: .2rem;
+        padding: .8rem 1rem;
+        font-size: 1.4rem;
+        text-align: center;
+        cursor: pointer;
     
-    svg {
+        svg {
+            width: 1rem;
+            margin-right: .4rem;
+            fill: @color-disable;
+        }
+    
+        &:hover,
+        &:hover svg {
+            background-color: @bgc-hover;
+        }
+    }
+    
+    .enable {
+        color: @color-enable;
+        background-color: @bgc-enable;
         fill: @color-enable;
+        
+        svg {
+            fill: @color-enable;
+        }
     }
 }
