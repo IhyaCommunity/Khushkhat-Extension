@@ -103,8 +103,7 @@ class Addon {
                 this._assignData(data);
                 this.setStyleState(data.isEnable);
                 resolve();
-
-            }, reject);
+            });
         });
     }
 
