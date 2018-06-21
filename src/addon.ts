@@ -7,7 +7,7 @@ class Addon {
     static readonly TITLE_DISABLE:string = "Khushkhat Disable";
     static readonly APPLICABLE_PROTOCOLS:Array<string> = ["http:", "https:"];
 
-    static readonly DEFAULT_FONT_INDEX:number = 1;
+    static readonly DEFAULT_FONT_INDEX:number = 0;
     static readonly DEFAULT_FONT_SIZE:number = 140;
 
     static isEnable:boolean = false;
@@ -109,7 +109,6 @@ class Addon {
     static loadData(tab):Promise<void> {
         return new Promise((resolve, reject) => {
             this.tabStorage.getData().then((data:FontData) => {
-                console.log(data);
                 this._assignData(data);
                 resolve();
             }, (reason) => {
