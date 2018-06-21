@@ -50,6 +50,7 @@ namespace Popup {
             });
 
             document.querySelector('.default-button').addEventListener('click', (e) => {
+                Addon.font.selectedSize = Addon.DEFAULT_FONT_SIZE;
                 Addon.font.changeFontSize();
                 this.setSelectedSizeText();
                 Addon.saveData();
