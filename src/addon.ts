@@ -90,7 +90,6 @@ class Addon {
             this.font.selectedSize = this.DEFAULT_FONT_SIZE;
             this.isEnable = false;
         }
-
     }
 
     static initLoadData(tab):Promise<void> {
@@ -110,6 +109,7 @@ class Addon {
     static loadData(tab):Promise<void> {
         return new Promise((resolve, reject) => {
             this.tabStorage.getData().then((data:FontData) => {
+                console.log(data);
                 this._assignData(data);
                 resolve();
             }, (reason) => {
