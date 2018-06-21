@@ -2,25 +2,24 @@ class Font {
 
     private static _instance:Font;
 
-    private constructor(public selectedIndex:number, public selectedSize:number)
-    {
-        this.fontFaceCss.file = this._getFontFaceStyle();
+    private constructor(public selectedIndex:number, public selectedSize:number) {
+        this.fontFaceCss = {
+            cssOrigin: browser.extensionTypes.CSSOrigin.user,
+            file: this._getFontFaceStyle()
+        };
+
+        this.fontCss = {
+            cssOrigin: browser.extensionTypes.CSSOrigin.user,
+            file: browser.extension.getURL("style/font.css")
+        };
     }
 
-    public static Instance(selectedIndex:number, selectedSize:number)
-    {
+    public static Instance(selectedIndex:number, selectedSize:number) {
         return this._instance || (this._instance = new this(selectedIndex, selectedSize));
     }
 
-    fontFaceCss = {
-        cssOrigin: browser.extensionTypes.CSSOrigin.user,
-        file: ''
-    };
-    
-    fontCss = {
-        cssOrigin: browser.extensionTypes.CSSOrigin.user,
-        file: browser.extension.getURL("style/font.css")
-    };
+    fontFaceCss:browser.extensionTypes.InjectDetails;
+    fontCss:browser.extensionTypes.InjectDetails;
 
     get fonts():FontObject[] {
 
