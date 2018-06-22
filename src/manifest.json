@@ -3,7 +3,7 @@
   "description": "Beautifies Arabic, Persian, Urdu, and other right-to-left (RTL) languages",
   "manifest_version": 2,
   "name": "Khushkhat",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "homepage_url": "https://github.com/SkyImpel/Khushkhat-Extension",
   "icons": {
     "48": "icons/logo.svg"
