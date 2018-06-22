@@ -3,8 +3,7 @@
 /// <reference path="./storage.ts" />
 
 class Addon {
-    static readonly TITLE_ENABLE:string = "Khushkhat Enable";
-    static readonly TITLE_DISABLE:string = "Khushkhat Disable";
+    static readonly TITLE:string = "Khushkhat";
     static readonly APPLICABLE_PROTOCOLS:Array<string> = ["http:", "https:"];
 
     static readonly DEFAULT_FONT_INDEX:number = 0;
@@ -23,26 +22,16 @@ class Addon {
     static get tabStorage():TabStorage {
         return TabStorage.Instance;
     }
-
-    static setStatus(tab:browser.tabs.Tab):Promise<void> {
-        return new Promise((resolve, reject) => {
-            browser.pageAction.getTitle({tabId: tab.id}).then((title:string) => {
-                this.isEnable = (title === this.TITLE_DISABLE);
-                resolve();
-            }, reject);
-        });
-    }
     
     static setUIState(tab:browser.tabs.Tab, state:boolean) {
         if (state) {
             browser.pageAction.setIcon({tabId: tab.id, path: browser.extension.getURL("icons/on.svg")});
-            browser.pageAction.setTitle({tabId: tab.id, title: this.TITLE_DISABLE});
         }
         else {
             browser.pageAction.setIcon({tabId: tab.id, path: browser.extension.getURL("icons/off.svg")});
-            browser.pageAction.setTitle({tabId: tab.id, title: this.TITLE_ENABLE});
         }
 
+        browser.pageAction.setTitle({tabId: tab.id, title: this.TITLE});
         browser.pageAction.show(tab.id);
     }
 
