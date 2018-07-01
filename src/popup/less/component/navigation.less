@@ -5,12 +5,13 @@
     align-items: center;
     justify-content: start;
     background-color: @bgc-light;
-    padding: .8rem 1rem;
+    padding: 1.2rem 1.4rem;
     
     button {
         border: 0 none;
         background: transparent;
         cursor: pointer;
+        padding: 0;
     
         &:disabled {
             cursor: default;
@@ -22,9 +23,13 @@
     }
 
     svg {
-        width: 1.4rem;
+        width: 2rem;
         fill: #5b4636;
         vertical-align: middle;
+    }
+
+    .option-clear-button {
+        margin-left: 1rem;
     }
 
     .option-show-button,
