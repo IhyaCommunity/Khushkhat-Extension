@@ -4,9 +4,9 @@
   "description": "",
   "main": "",
   "scripts": {
-    "build": "gulp clean && gulp --env production && cd dist && web-ext build",
+    "build": "gulp clean && gulp --env production && web-ext build -s=dist -a=dist",
     "dev": "gulp --env development && gulp watch",
-    "start": "cd dist && web-ext run --firefox=/bin/firefox-developer-edition",
+    "start": "cd dist && web-ext run -f=/bin/firefox-developer-edition",
     "copy": "gulp copy",
     "clean": "gulp clean"
   },
