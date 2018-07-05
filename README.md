@@ -37,4 +37,4 @@ M. Hannan Akbar ([FB](https://www.facebook.com/HannanAkbar) / [Twitter](https://
 
 ### License
 
-You're free to use Khushkhat for the good. 👍
+You're free to use Khushkhat for the good of all. 👍
