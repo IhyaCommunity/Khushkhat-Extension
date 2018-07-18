@@ -11,6 +11,12 @@ html, body {
     box-sizing: border-box;
 }
 
+// Fix colors for dark GTK+ themes
+input, select {
+    -moz-appearance: none !important;
+    background-color: #fff;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
