@@ -6,7 +6,7 @@
 Khushkhat beautifies Arabic, Persian, Urdu, Pashto and other right-to-left (RTL) languages. It detects the RTL text on a webpage and sets localized font and makes size adjustments.
 
 ### Demo
-<img src="demo.gif" alt="Khushkhat Demo">
+[![Khushkhat Firefox Addon](https://img.youtube.com/vi/I2Q9H6AAt0E/0.jpg)](https://www.youtube.com/watch?v=I2Q9H6AAt0E "Khushkhat Firefox Addon - Click to Watch!")
 
 ### Development
 Khushkhat is built using TypeScript and LESS. Build process is managed with Gulp.
@@ -36,5 +36,6 @@ You also need `web-ext` command line tool.
 M. Hannan Akbar ([FB](https://www.facebook.com/HannanAkbar) / [Twitter](https://twitter.com/HannanAkbar))
 
 ### License
+GPL 3
 
-You're free to use Khushkhat for the good of all. 👍
+Free to use Khushkhat for the good of all. 👍
